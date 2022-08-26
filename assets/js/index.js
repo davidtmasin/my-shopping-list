@@ -21,10 +21,11 @@ let category
 let response
 let flag1 = true
 let flag2 = true
+let frasePrompt = 'Você deseja adicionar um produto?'
 
 alert('Olá, seja bem-vindo(a) a sua lista de compras.')
 while (flag1) {
-    response = prompt('Você deseja adicionar um produto? Digite "SIM" ou "NÃO".')
+    response = prompt(`${frasePrompt} Digite "SIM" ou "NÃO".`)
     console.log(response)
     console.log(response[0])
     if(response == '' || response[0] == 'S' || response[0] == 's' || response[0] == 'Y' || response[0] == 'y'){
@@ -36,8 +37,9 @@ while (flag1) {
         case "SIM":     
             flag2 = true
             while (flag2) {
-                category = prompt(`Qual a categoria deste item?\nFRUTAS, LEGUMES E VERDURAS, CONGELADOS, GROSSO, GULOSEIMAS, MISTURA, BEBIDAS, PRODUTOS DE LIMPEZA, HIGIENE PESSOAL, LATICÍNIOS, BRINQUEDOS, MATERIAL ESCOLAR ou OUTROS?`).toUpperCase()
+                category = prompt(`Qual a categoria deste produto?\nFRUTAS, LEGUMES E VERDURAS, CONGELADOS, GROSSO, GULOSEIMAS, MISTURA, BEBIDAS, PRODUTOS DE LIMPEZA, HIGIENE PESSOAL, LATICÍNIOS, BRINQUEDOS, MATERIAL ESCOLAR ou OUTROS?`).toUpperCase()
                 verifyCategoryItem()
+                frasePrompt = 'Produto adicionado com sucesso!\nVocê deseja adicionar mais outro produto?'
             }            
             break
         case "NÃO":
