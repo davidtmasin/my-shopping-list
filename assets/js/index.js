@@ -60,7 +60,6 @@ enviar_lista.addEventListener('click', () => {
     let flag_whats = true
     while (flag_whats) {
         numWhatsapp = prompt('Para qual número de Whatsapp sua lista de compras será enviada? Digite 9 + número.')
-        console.log(numWhatsapp.length);
         if (numWhatsapp.length != 9) {
             alert('O número do Whatsapp está inválido! Digite novamente.')
         } else {
@@ -68,7 +67,7 @@ enviar_lista.addEventListener('click', () => {
         }
     }
 
-    enviar_lista.href = `https://wa.me/+5585${numWhatsapp}?text=${txt_lista}`
+    enviar_lista.href = `https://wa.me/5585${numWhatsapp}?text=${txt_lista}`
 })
 
 function doShoppingList() {
