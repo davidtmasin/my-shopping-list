@@ -68,7 +68,7 @@ enviar_lista.addEventListener('click', () => {
         }
     }
 
-    enviar_lista.href = `https://wa.me/5585${numWhatsapp}?text=${txt_lista}`
+    enviar_lista.href = `https://wa.me/+5585${numWhatsapp}?text=${txt_lista}`
 })
 
 function doShoppingList() {
