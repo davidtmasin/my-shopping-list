@@ -5,15 +5,32 @@
     box-sizing: border-box;
 }
 
-html,
+/* html,
 body {
     background-image: url('https://img.freepik.com/fotos-premium/lista-de-compras-carrinho-de-compras-com-caderno-e-lapis-sobre-fundo-azul-vista-do-topo_175682-21758.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    object-fit: contain;
+} */
+
+
+
+main::before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://img.freepik.com/fotos-premium/lista-de-compras-carrinho-de-compras-com-caderno-e-lapis-sobre-fundo-azul-vista-do-topo_175682-21758.jpg');
     background-size: cover;
+    opacity: 0.15;
 }
+ 
 
 #root {
     background: rgba(255, 255, 255, 0.774);
-
     border-radius: 10px;
     padding: 10px 10px;
     margin: 10px;
@@ -31,16 +48,18 @@ body {
     text-align: center;
 }
 
-#refresh, #limpar {
-    
+#refresh,
+#limpar {
     padding: 5px;
     font-size: 18px;
     background-color: rgba(129, 176, 247, 0.918);
     color: #fff;
     border-radius: 5px;
+    border: 2px solid #000;
     cursor: pointer;
 }
 
-#refresh:hover, #limpar:hover {
+#refresh:hover,
+#limpar:hover {
     background-color: rgba(176, 206, 252, 0.918);
 }
