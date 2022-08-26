@@ -1,0 +1,46 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    background-image: url('https://img.freepik.com/fotos-premium/lista-de-compras-carrinho-de-compras-com-caderno-e-lapis-sobre-fundo-azul-vista-do-topo_175682-21758.jpg');
+    background-size: cover;
+}
+
+#root {
+    background: rgba(255, 255, 255, 0.774);
+
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin: 10px;
+}
+
+#root h1 {
+    margin-bottom: 20px;
+}
+
+#root p {
+    margin-bottom: 10px;
+}
+
+.container-btn {
+    text-align: center;
+}
+
+#refresh, #limpar {
+    
+    padding: 5px;
+    font-size: 18px;
+    background-color: rgba(129, 176, 247, 0.918);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#refresh:hover, #limpar:hover {
+    background-color: rgba(176, 206, 252, 0.918);
+}
