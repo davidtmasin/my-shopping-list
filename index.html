@@ -5,18 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:site_name" content="Minha Lista de Compras" />
+    <meta property="og:title" content="Minha Lista de Compras" />
+    <meta property="og:url" content="https://minhalistadecompras.vercel.app/" />
+    <meta property="og:image" content="https://minhalistadecompras.vercel.app/assets/img/shopcar.png" />
+    <meta property="og:locale" content="pt_BR" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
-    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/747/747168.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/img/shopcar.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/index.css">
-    <title>Lista de Compras</title>
+    <title>Minha Lista de Compras</title>
 </head>
+
 <body>
     <div id="root">
         <p>Ainda não há uma lista de compras.</p>
     </div>
     <div class="container-btn">
-        <input id="refresh" type="button" value="Nova Lista" onclick="triggerBtn()"/>
+        <input id="refresh" type="button" value="Nova Lista" onclick="triggerBtn()" />
         <input id="limpar" type="button" value="Limpar" />
     </div>
     <a id="lista" title="Envie a lista de compras" style="
@@ -38,4 +44,5 @@
     </a>
     <script src="./assets/js/index.js"></script>
 </body>
+
 </html>
