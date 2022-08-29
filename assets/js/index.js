@@ -25,6 +25,7 @@ let response
 let frasePrompt = 'Você deseja adicionar um produto?'
 
 function triggerBtn() {
+  frasePrompt = 'Você deseja adicionar um produto?'
   let flag1 = true
   let flag2 = true
   alert('Olá, seja bem-vindo(a) a sua lista de compras.')
@@ -50,12 +51,34 @@ function triggerBtn() {
       case 'SIM':
         flag2 = true
         while (flag2) {
+          // console.log(flag2);
           category = prompt(
             `Qual a categoria deste produto?\nFRUTAS, LEGUMES E VERDURAS, CONGELADOS, GROSSO, GULOSEIMAS, MISTURA, BEBIDAS, PRODUTOS DE LIMPEZA, HIGIENE PESSOAL, LATICÍNIOS, BRINQUEDOS, MATERIAL ESCOLAR ou OUTROS?`
-          ).toUpperCase()
-          verifyCategoryItem()
-          frasePrompt =
-            'Produto adicionado com sucesso!\nVocê deseja adicionar mais outro produto?'
+          )
+          console.log(category)
+          if (category == '') {
+            alert('Você precisa informar uma categoria!')
+          } else if (category == null) {
+            flag1 = false
+            flag2 = false
+            doShoppingList()
+          } else {
+            category = category.toUpperCase()
+            // verifyCategoryItem(category)
+            let retorno = verifyCategoryItem(category)
+            // console.log(retorno);
+            if (retorno == 'NOK') {
+              // console.log(`Entrei no retorno = NOK e meu valor é ${retorno}`);
+              // alert('Digite o nome do produto')
+              flag1 = false
+              flag2 = false
+              doShoppingList()
+            } else {
+              frasePrompt =
+                'Produto adicionado com sucesso!\nVocê deseja adicionar mais outro produto?'
+              flag2 = false
+            }
+          }
         }
         break
       case 'NÃO':
@@ -77,71 +100,8 @@ function triggerBtn() {
         break
     }
   }
-
-  function verifyCategoryItem() {
-    if (category == 'FRUTAS') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.fruits.push(product)
-      flag2 = false
-    } else if (
-      category == 'LEGUMES E VERDURAS' ||
-      category == 'LEGUMES' ||
-      category == 'VERDURAS'
-    ) {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.vegetables.push(product)
-      flag2 = false
-    } else if (category == 'CONGELADOS') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.frozen_food.push(product)
-      flag2 = false
-    } else if (category == 'GROSSO') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.grosso.push(product)
-      flag2 = false
-    } else if (category == 'GULOSEIMAS') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.junk_food.push(product)
-      flag2 = false
-    } else if (category == 'MISTURA') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.mistura.push(product)
-      flag2 = false
-    } else if (category == 'BEBIDAS') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.drinks.push(product)
-      flag2 = false
-    } else if (category == 'PRODUTOS DE LIMPEZA' || category == 'LIMPEZA') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.cleaning_products.push(product)
-      flag2 = false
-    } else if (category == 'HIGIENE PESSOAL' || category == 'HIGIENE') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.personal_hygiene.push(product)
-      flag2 = false
-    } else if (category == 'LATICÍNIOS') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.dairy.push(product)
-      flag2 = false
-    } else if (category == 'BRINQUEDOS') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.toys.push(product)
-      flag2 = false
-    } else if (category == 'MATERIAL ESCOLAR') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.school_supplies.push(product)
-      flag2 = false
-    } else if (category == 'OUTROS') {
-      product = prompt(`Qual será o produto da categoria ${category}?`)
-      products.others.push(product)
-      flag2 = false
-    } else {
-      alert(
-        `Não conseguimos localizar a categoria "${category}". Vamos tentar novamente.`
-      )
-    }
-  }
 }
+
 enviar_lista.addEventListener('click', () => {
   let numWhatsapp
   let flag_whats = true
@@ -168,15 +128,174 @@ btn_limpar.addEventListener('click', () => {
 
 btn_remove.addEventListener('click', () => {
   let element = document.body.contains(info)
-  console.log(element)
+  // console.log(element)
   if (element == true) {
     alert('Primeiro faça a sua lista antes de remover um produto!')
   } else {
     product = prompt('Qual o nome do produto que você gostaria de remover?')
-    removeProdut(product)
-    doShoppingList()
+    let retorno = removeProdut(product)
+    // console.log(retorno);
+    if (retorno != 'Não atualize a lista') {
+      doShoppingList()
+    }
   }
 })
+
+function verifyCategoryItem(category) {
+  if (category == 'FRUTAS') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.fruits.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (
+    category == 'LEGUMES E VERDURAS' ||
+    category == 'LEGUMES' ||
+    category == 'VERDURAS'
+  ) {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.vegetables.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'CONGELADOS') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.frozen_food.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'GROSSO') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.grosso.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'GULOSEIMAS') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.junk_food.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'MISTURA') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.mistura.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'BEBIDAS') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.drinks.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'PRODUTOS DE LIMPEZA' || category == 'LIMPEZA') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.cleaning_products.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'HIGIENE PESSOAL' || category == 'HIGIENE') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.personal_hygiene.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'LATICÍNIOS') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.dairy.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'BRINQUEDOS') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.toys.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'MATERIAL ESCOLAR') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    if (product != 'Valor nulo') {
+      products.school_supplies.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else if (category == 'OUTROS') {
+    product = prompt(`Qual será o produto da categoria ${category}?`)
+    // verifyProduct(product)
+    product = verifyProduct(product)
+    console.log(product);
+    if (product != 'Valor nulo') {
+      products.others.push(product)
+      return 'OK'
+    } else {
+      return 'NOK'
+    }
+
+  } else {
+    alert(
+      `Não conseguimos localizar a categoria "${category}". Vamos tentar novamente.`
+    )
+  }
+}
 
 function removeProdut(product) {
   let index
@@ -184,56 +303,70 @@ function removeProdut(product) {
     index = products.fruits.indexOf(product)
     products.fruits.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.vegetables.indexOf(product) != -1) {
     index = products.vegetables.indexOf(product)
     products.vegetables.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.frozen_food.indexOf(product) != -1) {
     index = products.frozen_food.indexOf(product)
     products.frozen_food.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.grosso.indexOf(product) != -1) {
     index = products.grosso.indexOf(product)
     products.grosso.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.junk_food.indexOf(product) != -1) {
     index = products.junk_food.indexOf(product)
     products.junk_food.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.mistura.indexOf(product) != -1) {
     index = products.mistura.indexOf(product)
     products.mistura.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.drinks.indexOf(product) != -1) {
     index = products.drinks.indexOf(product)
     products.drinks.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.cleaning_products.indexOf(product) != -1) {
     index = products.cleaning_products.indexOf(product)
     products.cleaning_products.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.personal_hygiene.indexOf(product) != -1) {
     index = products.personal_hygiene.indexOf(product)
     products.personal_hygiene.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.dairy.indexOf(product) != -1) {
     index = products.dairy.indexOf(product)
     products.dairy.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.toys.indexOf(product) != -1) {
     index = products.toys.indexOf(product)
     products.toys.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.school_supplies.indexOf(product) != -1) {
     index = products.school_supplies.indexOf(product)
     products.school_supplies.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else if (products.others.indexOf(product) != -1) {
     index = products.others.indexOf(product)
     products.others.splice(index, 1)
     alert(`Exclusão do produto "${product}" realizada com sucesso!`)
+    return 'Atualize a lista'
   } else {
     alert(`Não foi possível localizar o produto "${product}" em sua lista!`)
+    return 'Não atualize a lista'
   }
 }
 
@@ -311,12 +444,12 @@ function doShoppingList() {
     cleaning_products += `${category}, `
   })
   console.log(
-    `Produtos de limpeza: ${cleaning_products.slice(
+    `Produtos de Limpeza: ${cleaning_products.slice(
       0,
       cleaning_products.length - 2
     )}.\n`
   )
-  txt_lista += `*Produtos de limpeza*: ${cleaning_products.slice(
+  txt_lista += `*Produtos de Limpeza*: ${cleaning_products.slice(
     0,
     cleaning_products.length - 2
   )}.\n`
@@ -351,12 +484,12 @@ function doShoppingList() {
     school_supplies += `${category}, `
   })
   console.log(
-    `Material escolar: ${school_supplies.slice(
+    `Material Escolar: ${school_supplies.slice(
       0,
       school_supplies.length - 2
     )}.\n`
   )
-  txt_lista += `*Material escolar*: ${school_supplies.slice(
+  txt_lista += `*Material Escolar*: ${school_supplies.slice(
     0,
     school_supplies.length - 2
   )}.\n`
@@ -369,58 +502,66 @@ function doShoppingList() {
 
   shopping_list.innerHTML = `<h1 style="text-align: center; font-size: 24px;">LISTA DE COMPRAS</h1>
                    <p><strong style="font-size: 20px;">Frutas</strong>: ${fruits.slice(
-                     0,
-                     fruits.length - 2
-                   )}.</p>
+    0,
+    fruits.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Verduras e legumes</strong>: ${vegetables.slice(
-                     0,
-                     vegetables.length - 2
-                   )}.</p>
+    0,
+    vegetables.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Congelados</strong>: ${frozen_food.slice(
-                     0,
-                     frozen_food.length - 2
-                   )}.</p>
+    0,
+    frozen_food.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Grosso</strong>: ${grosso.slice(
-                     0,
-                     grosso.length - 2
-                   )}.</p>
+    0,
+    grosso.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Guloseimas</strong>: ${junk_food.slice(
-                     0,
-                     junk_food.length - 2
-                   )}.</p>
+    0,
+    junk_food.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Mistura</strong>: ${mistura.slice(
-                     0,
-                     mistura.length - 2
-                   )}.</p>
+    0,
+    mistura.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Bebidas</strong>: ${drinks.slice(
-                     0,
-                     drinks.length - 2
-                   )}.</p>
-                   <p><strong style="font-size: 20px;">Produtos de limpeza</strong>: ${cleaning_products.slice(
-                     0,
-                     cleaning_products.length - 2
-                   )}.</p>
+    0,
+    drinks.length - 2
+  )}.</p>
+                   <p><strong style="font-size: 20px;">Produtos de Limpeza</strong>: ${cleaning_products.slice(
+    0,
+    cleaning_products.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Higiene Pessoal</strong>: ${personal_hygiene.slice(
-                     0,
-                     personal_hygiene.length - 2
-                   )}.</p>
+    0,
+    personal_hygiene.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Laticínios</strong>: ${dairy.slice(
-                     0,
-                     dairy.length - 2
-                   )}.</p>
+    0,
+    dairy.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Brinquedos</strong>: ${toys.slice(
-                     0,
-                     toys.length - 2
-                   )}.</p>
-                   <p><strong style="font-size: 20px;">Material escolar</strong>: ${school_supplies.slice(
-                     0,
-                     school_supplies.length - 2
-                   )}.</p>
+    0,
+    toys.length - 2
+  )}.</p>
+                   <p><strong style="font-size: 20px;">Material Escolar</strong>: ${school_supplies.slice(
+    0,
+    school_supplies.length - 2
+  )}.</p>
                    <p><strong style="font-size: 20px;">Outros</strong>: ${others.slice(
-                     0,
-                     others.length - 2
-                   )}.</p>`
+    0,
+    others.length - 2
+  )}.</p>`
 
   txt_lista = window.encodeURIComponent(txt_lista)
   return txt_lista
+}
+
+function verifyProduct(product) {
+  if (product == null) {
+    return 'Valor nulo'
+  } else {
+    return `${product}`
+  }
 }
