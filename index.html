@@ -1,51 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:site_name" content="Minha Lista de Compras" />
     <meta property="og:title" content="Minha Lista de Compras" />
     <meta property="og:url" content="https://minhalistadecompras.vercel.app/" />
-    <meta property="og:image" content="https://minhalistadecompras.vercel.app/assets/img/shopcar.png" />
-    <meta name="theme-color" content="#FFF">
+    <meta
+      property="og:image"
+      content="https://minhalistadecompras.vercel.app/assets/img/shopcar.png"
+    />
+    <meta name="theme-color" content="#FFF" />
     <meta property="og:locale" content="pt_BR" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
-    <link rel="shortcut icon" href="./assets/img/shopcar.png" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/css/index.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="./assets/img/shopcar.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./assets/css/index.css" />
     <title>Minha Lista de Compras</title>
-</head>
-
-<body>
+  </head>
+  <body>
     <main>
-        <div id="root">
-            <p>Ainda não há uma lista de compras.</p>
-        </div>
-        <div class="container-btn">
-            <input id="refresh" type="button" value="Nova Lista" onclick="triggerBtn()" />
-            <input id="limpar" type="button" value="Limpar" />
-        </div>
-        <a id="lista" title="Envie a lista de compras" style="
-                    position: fixed;
-                    width: 60px;
-                    height: 60px;
-                    bottom: 30px;
-                    right: 10px;
-                    background-color: #25d366;
-                    color: #fff;
-                    border-radius: 50px;
-                    text-align: center;
-                    font-size: 40px;
-                    box-shadow: 2px 2px 4px #888;
-                    z-index: 1000;
-                    cursor: pointer;
-                  " target="_blank">
-            <i style="margin-top: 10px" class="fa fa-whatsapp"></i>
-        </a>
+      <div id="root">
+        <p id="text_info">Ainda não há uma lista de compras.</p>
+      </div>
+      <div class="container-btn">
+        <input
+          id="nova_lista"
+          type="button"
+          value="Nova Lista"
+          onclick="triggerBtn()"
+        />
+        <input id="remover_item" type="button" value="Remover Produto" />
+        <input id="limpar" type="button" value="Limpar" />
+      </div>
+      <a
+        id="lista"
+        title="Envie a lista de compras"
+        style="
+          position: fixed;
+          width: 60px;
+          height: 60px;
+          bottom: 30px;
+          right: 10px;
+          background-color: #25d366;
+          color: #fff;
+          border-radius: 50px;
+          text-align: center;
+          font-size: 40px;
+          box-shadow: 2px 2px 4px #888;
+          z-index: 1000;
+          cursor: pointer;
+        "
+        target="_blank"
+      >
+        <i style="margin-top: 10px" class="fa fa-whatsapp"></i>
+      </a>
     </main>
     <script src="./assets/js/index.js"></script>
-</body>
-
+  </body>
 </html>
