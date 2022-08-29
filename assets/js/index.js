@@ -68,6 +68,7 @@ function triggerBtn() {
           frasePrompt = 'Você deseja adicionar mais outro produto?'
         } else {
           doShoppingList()
+          frasePrompt = 'Você deseja adicionar mais outro produto?'
           flag1 = false
         }
         break
